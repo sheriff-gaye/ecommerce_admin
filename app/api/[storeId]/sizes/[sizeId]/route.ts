@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 
 
-export async function GET(reg: Request, { params }: { params: { sizeId:string } }) {
+export async function GET(reg: Request, { params }: { params: { sizeId: string } }) {
 
     try {
 
@@ -30,14 +30,14 @@ export async function GET(reg: Request, { params }: { params: { sizeId:string } 
 }
 
 
-export async function PATCH(reg: Request, { params }: { params: {sizeId:string, storeId: string } }) {
+export async function PATCH(reg: Request, { params }: { params: { sizeId: string, storeId: string } }) {
 
     try {
 
         const { userId } = auth();
         const body = await reg.json();
 
-        const { name,value } = body
+        const { name, value } = body
 
         if (!userId) {
             return new NextResponse("Unauthorized", { status: 401 });
@@ -90,50 +90,48 @@ export async function PATCH(reg: Request, { params }: { params: {sizeId:string, 
 }
 
 
-    export async function DELETE(reg: Request, { params }: { params: { sizeId:string, storeId: string } }) {
+export async function DELETE(reg: Request, { params }: { params: { sizeId: string, storeId: string } }) {
 
-        try {
-    
-            const { userId } = auth();
-      
-    
-            if (!userId) {
-                return new NextResponse("Unauthorized", { status: 401 });
-            }
-    
-    
-            if (!params.sizeId) {
-                return new NextResponse("Billboard  is Required", { status: 400 });
-            }
+    try {
 
-            const storeByUserId = await db.store.findFirst({
-                where: {
-                    id: params.storeId,
-                    userId
-                }
-            });
-    
-            if (!storeByUserId) {
-                return new NextResponse("Unauthorized", { status: 403 });
-            }
-    
-            const size= await db.size.deleteMany({
-                where: {
-                    id: params.sizeId,
-                }
-            });
-    
-            return NextResponse.json(size);
-    
-        } catch (error) {
-            console.log("[SIZES_DELETE]", error);
-            return new NextResponse("Interal Error", { status: 500 })
-    
-    
-    
+        const { userId } = auth();
+
+
+        if (!userId) {
+            return new NextResponse("Unauthorized", { status: 401 });
         }
-    
 
+
+        if (!params.sizeId) {
+            return new NextResponse("Billboard  is Required", { status: 400 });
+        }
+
+        const storeByUserId = await db.store.findFirst({
+            where: {
+                id: params.storeId,
+                userId
+            }
+        });
+
+        if (!storeByUserId) {
+            return new NextResponse("Unauthorized", { status: 403 });
+        }
+
+        const size = await db.size.deleteMany({
+            where: {
+                id: params.sizeId,
+            }
+        });
+
+        return NextResponse.json(size);
+
+    } catch (error) {
+        console.log("[SIZES_DELETE]", error);
+        return new NextResponse("Interal Error", { status: 500 })
+
+
+
+    }
 
 
 }

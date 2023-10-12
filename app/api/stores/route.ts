@@ -26,10 +26,7 @@ export async function POST(reg: Request) {
             }
         });
 
-
-
         return NextResponse.json(store);
-
 
     } catch (error) {
 

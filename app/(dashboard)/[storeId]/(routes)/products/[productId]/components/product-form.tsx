@@ -99,14 +99,14 @@ export const ProductForm = ({
       setLoading(true);
       if (initialData) {
         await axios.patch(
-          `/api/${params.storeId}/billboards/${params.billboardId}`,
+          `/api/${params.storeId}/products/${params.productId}`,
           data
         );
       } else {
-        await axios.post(`/api/${params.storeId}/billboards`, data);
+        await axios.post(`/api/${params.storeId}/products`, data);
       }
       router.refresh();
-      router.push(`/${params.storeId}/billboards`);
+      router.push(`/${params.storeId}/products`);
       toast.success(toastMessage);
     } catch (error: any) {
       toast.error("Something went wrong.");
@@ -125,9 +125,7 @@ export const ProductForm = ({
       router.push(`/${params.storeId}/billboards`);
       toast.success("Billboard deleted.");
     } catch (error: any) {
-      toast.error(
-        "Something went wrong"
-      );
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
       setOpen(false);
@@ -333,20 +331,16 @@ export const ProductForm = ({
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>
-                      Featured
-                    </FormLabel>
+                    <FormLabel>Featured</FormLabel>
                     <FormDescription>
                       This product will appear on the home page
                     </FormDescription>
-                    
                   </div>
                 </FormItem>
               )}
             />
 
-
-<FormField
+            <FormField
               control={form.control}
               name="isArchived"
               render={({ field }) => (
@@ -358,13 +352,10 @@ export const ProductForm = ({
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>
-                      Archived
-                    </FormLabel>
+                    <FormLabel>Archived</FormLabel>
                     <FormDescription>
                       This product will not appear any where in the store
                     </FormDescription>
-                    
                   </div>
                 </FormItem>
               )}

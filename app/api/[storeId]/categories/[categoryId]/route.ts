@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs";
+import db from "@/lib/prismadb";
 
-import prismadb from "@/lib/prismadb";
 
 export async function GET(
   req: Request,
@@ -12,7 +12,7 @@ export async function GET(
       return new NextResponse("Category id is required", { status: 400 });
     }
 
-    const category = await prismadb.category.findUnique({
+    const category = await db.category.findUnique({
       where: {
         id: params.categoryId
       },
@@ -43,7 +43,7 @@ export async function DELETE(
       return new NextResponse("Category id is required", { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await db.store.findFirst({
       where: {
         id: params.storeId,
         userId,
@@ -54,7 +54,7 @@ export async function DELETE(
       return new NextResponse("Unauthorized", { status: 405 });
     }
 
-    const category = await prismadb.category.delete({
+    const category = await db.category.delete({
       where: {
         id: params.categoryId,
       }
@@ -95,7 +95,7 @@ export async function PATCH(
       return new NextResponse("Category id is required", { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await db.store.findFirst({
       where: {
         id: params.storeId,
         userId,
@@ -106,7 +106,7 @@ export async function PATCH(
       return new NextResponse("Unauthorized", { status: 405 });
     }
 
-    const category = await prismadb.category.update({
+    const category = await db.category.update({
       where: {
         id: params.categoryId,
       },
