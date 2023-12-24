@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.25.3",
+    "@clerk/nextjs": "^4.27.2",
     "@hookform/resolvers": "^3.3.1",
     "@prisma/client": "^5.3.1",
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -25,6 +25,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
+    "cors": "^2.8.5",
     "date-fns": "^2.30.0",
     "lucide-react": "^0.284.0",
     "next": "13.5.4",
@@ -39,6 +40,7 @@
     "zustand": "^4.4.3"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
